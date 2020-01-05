@@ -1,0 +1,47 @@
+{
+    "name": "idct/php-telegram-sender",
+    "description": "Simple PHP library which simplifies the task of sending bot messages using Telegram IM",
+    "type": "library",
+    "keywords": [
+        "telegram",
+        "php",
+        "instant message",        
+        "telegramim"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "IDCT Bartosz Pachołek",
+            "email": "bartosz@idct.pl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1",
+        "ext-curl": "*",
+        "myclabs/php-enum": "^1.7.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "^7.5",
+        "php-mock/php-mock-phpunit": "^2.5",
+        "php-coveralls/php-coveralls": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "IDCT\\TelegramSender\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/phpunit/phpunit/phpunit"
+        ],
+        "fix": [
+            "bash fix-code.sh"
+        ],
+        "generate-coveralls": [
+            "./vendor/php-coveralls/php-coveralls/bin/php-coveralls -v"
+        ]
+
+    }
+}
