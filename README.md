@@ -45,7 +45,7 @@ TelegramSender::sendMessage(Bot $bot, Channel $channel, string $message, ParseMo
 
 Messages support __HTML__ and __Markdown__ depending on the `$parseMode` arguemnt's value.
 
-`$channel` must be an instance of `PublicChannel` or `PrivateChannel`.
+`$channel` must be an instance of `PublicChannel` or `PrivateChannel` (this is future-proof mechanism as for some methods which are not yet implemented it matters).
 
 Example:
 ```php
