@@ -3,6 +3,8 @@ PHP Telegram Sender
 
 Simple PHP library which simplifies the task of sending bot messages using Telegram IM.
 
+![Tests status](https://github.com/ideaconnect/php-telegram-sender/workflows/All%20tests%20using%20PHPUnit/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/ideaconnect/php-telegram-sender/badge.svg?branch=master)](https://coveralls.io/github/ideaconnect/php-telegram-sender?branch=master) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ideaconnect/php-telegram-sender?label=latest%20version&sort=semver)
+
 ## Installation
 The best way to install the library in your project is by using **Composer**:
 ```bash
