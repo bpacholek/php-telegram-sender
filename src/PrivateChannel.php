@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IDCT\TelegramSender;
 
 /**
@@ -12,7 +14,7 @@ class PrivateChannel extends Channel
     /**
      * Channel's key: id with applied filters required for specific cases.
      *
-     * @return int;
+     * @var null|int;
      */
     protected $channelKey;
 

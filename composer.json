@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
-        "phpunit/phpunit": "^7.5",
+        "phpunit/phpunit": ">=8.5.12",
         "php-mock/php-mock-phpunit": "^2.5",
         "php-coveralls/php-coveralls": "^2.1"
     },

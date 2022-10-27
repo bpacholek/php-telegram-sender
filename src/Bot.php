@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IDCT\TelegramSender;
 
 use InvalidArgumentException;
@@ -44,11 +46,11 @@ class Bot
      */
     public function __construct(int $id, string $key)
     {
-        if (empty($id) || $id === 0 || !is_int($id)) {
+        if ($id === 0) {
             throw new InvalidArgumentException("Missing or invalid id.");
         }
 
-        if (empty($key)) {
+        if ($key === '') {
             throw new InvalidArgumentException("Missing key.");
         }
 

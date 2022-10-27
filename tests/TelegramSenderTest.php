@@ -16,10 +16,10 @@ final class TelegramSenderTest extends TestCase
 {
     use \phpmock\phpunit\PHPMock;
 
-    public function testSend()
+    public function testSend() : void
     {
         $telegramSenderBroken = new class extends TelegramSender {
-            public static function preparePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null)
+            public static function preparePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null) : array
             {
                 return parent::prepareMessagePayload($channel, $message, $parseMode, $disableWebPagePreview, $disableAudioNotification, $threadId);
             }
@@ -42,10 +42,10 @@ final class TelegramSenderTest extends TestCase
         TelegramSender::sendMessage($bot, $channel, $message);
     }
 
-    public function testSend_allArgs()
+    public function testSend_allArgs() : void
     {
         $telegramSenderBroken = new class extends TelegramSender {
-            public static function preparePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null)
+            public static function preparePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null) : array
             {
                 return parent::prepareMessagePayload($channel, $message, $parseMode, $disableWebPagePreview, $disableAudioNotification, $threadId);
             }
@@ -68,11 +68,11 @@ final class TelegramSenderTest extends TestCase
         TelegramSender::sendMessage($bot, $channel, $message);
     }
 
-    public function testSend_ok_false()
+    public function testSend_ok_false() : void
     {
         $this->expectException(TelegramSenderException::class);
         $telegramSenderBroken = new class extends TelegramSender {
-            public static function preparePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null)
+            public static function preparePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null) : array
             {
                 return parent::prepareMessagePayload($channel, $message, $parseMode, $disableWebPagePreview, $disableAudioNotification, $threadId);
             }
@@ -96,7 +96,7 @@ final class TelegramSenderTest extends TestCase
         TelegramSender::sendMessage($bot, $channel, $message);
     }
 
-    public function testSendFail_false()
+    public function testSendFail_false() : void
     {
         $this->expectException(TelegramSenderException::class);
                   
@@ -110,7 +110,7 @@ final class TelegramSenderTest extends TestCase
         TelegramSender::sendMessage($bot, $channel, $message);
     }
 
-    public function testSendFail_falsejson()
+    public function testSendFail_falsejson() : void
     {
         $this->expectException(TelegramSenderException::class);
                   
@@ -124,7 +124,7 @@ final class TelegramSenderTest extends TestCase
         TelegramSender::sendMessage($bot, $channel, $message);
     }
 
-    public function testSendFail_false_nook()
+    public function testSendFail_false_nook() : void
     {
         $this->expectException(TelegramSenderException::class);
                   
@@ -140,13 +140,13 @@ final class TelegramSenderTest extends TestCase
         TelegramSender::sendMessage($bot, $channel, $message);
     }
     
-    public function testRetrieveBotInfo_invalidArgument()
+    public function testRetrieveBotInfo_invalidArgument() : void
     {
         $this->expectException(InvalidArgumentException::class);
         TelegramSender::retrieveBotInfo(0);
     }
 
-    public function testRetrieveBotInfo()
+    public function testRetrieveBotInfo() : void
     {
         $curlExec = $this->getFunctionMock("IDCT\\TelegramSender\\", "curl_exec");
         $curlExec->expects($this->once())->willReturn(\json_encode([
@@ -167,7 +167,7 @@ final class TelegramSenderTest extends TestCase
         $this->assertEquals($response->getLastName(), 'last');
     }
 
-    public function testRetrieveBotInfo_justId()
+    public function testRetrieveBotInfo_justId() : void
     {
         $curlExec = $this->getFunctionMock("IDCT\\TelegramSender\\", "curl_exec");
         $curlExec->expects($this->once())->willReturn(\json_encode([
@@ -184,13 +184,13 @@ final class TelegramSenderTest extends TestCase
         $this->assertEquals($response->getLastName(), null);
     }
 
-    public function testCheckIfBotIsValid_invalidArgument()
+    public function testCheckIfBotIsValid_invalidArgument() : void
     {
         $this->expectException(InvalidArgumentException::class);
         TelegramSender::checkIfBotIsValid(0);
     }
 
-    public function testCheckIfBotIsValid_true()
+    public function testCheckIfBotIsValid_true() : void
     {
         $curlExec = $this->getFunctionMock("IDCT\\TelegramSender\\", "curl_exec");
         $curlExec->expects($this->once())->willReturn(\json_encode([
@@ -204,7 +204,7 @@ final class TelegramSenderTest extends TestCase
         $this->assertEquals(true, $response);
     }
 
-    public function testCheckIfBotIsValid_false()
+    public function testCheckIfBotIsValid_false() : void
     {
         $curlExec = $this->getFunctionMock("IDCT\\TelegramSender\\", "curl_exec");
         $curlExec->expects($this->once())->willReturn(\json_encode([

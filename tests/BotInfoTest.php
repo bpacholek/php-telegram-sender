@@ -10,7 +10,7 @@ final class BotInfoTest extends TestCase
 {
     use \phpmock\phpunit\PHPMock;
 
-    public function testJustIdSet()
+    public function testJustIdSet() : void
     {
         $botId = 123123123;
         $botKey = "AAFKdyoJD6wHmHW85TfUktEMc2x5iz9melE";
@@ -21,7 +21,7 @@ final class BotInfoTest extends TestCase
         $this->assertEquals(null, $bot->getLastName());
     }
 
-    public function testAllParams()
+    public function testAllParams() : void
     {
         $botId = 123123123;
         $username = 'abc';
@@ -34,7 +34,7 @@ final class BotInfoTest extends TestCase
         $this->assertEquals($lastname, $bot->getLastName());
     }
 
-    public function testIsValid_false()
+    public function testIsValid_false() : void
     {
         $botId = 123123123;
         $botId = 123123123;
@@ -53,7 +53,7 @@ final class BotInfoTest extends TestCase
         $this->assertEquals(false, $bot->isValid());
     }
 
-    public function testIsValid_true()
+    public function testIsValid_true() : void
     {
         $botId = 123123123;
         $bot = new BotInfo($botId);

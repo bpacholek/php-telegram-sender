@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IDCT\TelegramSender;
 
 use InvalidArgumentException;
@@ -26,14 +28,14 @@ class TelegramSender
      * @param Bot $bot instance of Bot class with id and key set.
      * @param Channel $channel
      * @param string $message
-     * @param ParseMode $parseMode string parsing mode, defaults to HTML (if set to null).
+     * @param null|ParseMode $parseMode string parsing mode, defaults to HTML (if set to null).
      * @param bool disableWebPagePreview If set to true then Telegram will not try to generate previews out of links in the contents.
      * @param bool disableAudioNotification If set to true then Telegram will not use audio notification for the message.
-     * @param int threadId
+     * @param null|int threadId
      * @return array
      * @throws TelegramSenderException
      */
-    public static function sendMessage(Bot $bot, Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null)
+    public static function sendMessage(Bot $bot, Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null) : array
     {
         $url = self::ENDPOINT . $bot->getAuthKey() . '/sendMessage';
         $payload = static::prepareMessagePayload($channel, $message, $parseMode, $disableWebPagePreview, $disableAudioNotification, $threadId);
@@ -49,15 +51,15 @@ class TelegramSender
      * @throws TelegramSenderException
      * @return BotInfo
      */
-    public static function retrieveBotInfo(int $botId)
+    public static function retrieveBotInfo(int $botId) : BotInfo
     {
-        if (!is_int($botId) || $botId === 0) {
+        if ($botId === 0) {
             throw new InvalidArgumentException("Invalid or missing bot id.");
         }
         $url = self::ENDPOINT . $botId . '/getMe';
         $data = static::call($url)['result'];
 
-        return new BotInfo($data['id'], isset($data['username']) ? $data['username'] : null, isset($data['first_name']) ? $data['first_name'] : null, isset($data['last_name']) ? $data['last_name'] : null);
+        return new BotInfo($data['id'], $data['username'] ?? null, $data['first_name'] ?? null, $data['last_name'] ?? null);
     }
 
     /**
@@ -70,7 +72,7 @@ class TelegramSender
      */
     public static function checkIfBotIsValid(int $botId) : bool
     {
-        if (!is_int($botId) || $botId === 0) {
+        if ($botId === 0) {
             throw new InvalidArgumentException("Invalid or missing bot id.");
         }
         $url = self::ENDPOINT . $botId . '/getMe';
@@ -91,10 +93,11 @@ class TelegramSender
      * @param Bot $bot instance of Bot class with id and key set.
      * @param Channel $channel
      * @param string $message
-     * @param ParseMode $parseMode string parsing mode, defaults to HTML (if set to null).
+     * @param null|ParseMode $parseMode string parsing mode, defaults to HTML (if set to null).
      * @param bool disableWebPagePreview If set to true then Telegram will not try to generate previews out of links in the contents.
      * @param bool disableAudioNotification If set to true then Telegram will not use audio notification for the message.
-     * @param int threadId
+     * @param null|int threadId
+     * @return array
      * @throws TelegramSenderException
      */
     protected static function prepareMessagePayload(Channel $channel, string $message, ParseMode $parseMode = null, bool $disableWebPagePreview = false, bool $disableAudioNotification = false, int $threadId = null) : array
@@ -124,7 +127,7 @@ class TelegramSender
      * When $payload is provided sends data as POST.
      *
      * @param string $url
-     * @param array $payload
+     * @param null|array $payload
      * @throws TelegramSenderException
      * @return array
      */
@@ -153,7 +156,7 @@ class TelegramSender
         curl_close($ch);
         $response = json_decode($result, true);
         if ($response === false || !isset($response['ok'])) {
-            throw new TelegramSenderException($response, TelegramSenderException::INVALID_RESPONSE);
+            throw new TelegramSenderException($result, TelegramSenderException::INVALID_RESPONSE);
         }
 
         if ($response['ok'] === false) {

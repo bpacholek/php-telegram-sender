@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 final class TelegramSenderExceptionTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor() : void
     {
-        $ex = new TelegramSenderException(null, TelegramSenderException::INVALID_RESPONSE);
+        $ex = new TelegramSenderException('', TelegramSenderException::INVALID_RESPONSE);
         $this->assertEquals($ex->getMessage(), 'Invalid Bot Id or command.');
 
         $ex = new TelegramSenderException('test', 123);

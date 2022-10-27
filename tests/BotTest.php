@@ -11,7 +11,7 @@ final class BotTest extends TestCase
 {
     use \phpmock\phpunit\PHPMock;
 
-    public function testGetAuthKey()
+    public function testGetAuthKey() : void
     {
         $botId = 123123123;
         $botKey = "AAFKdyoJD6wHmHW85TfUktEMc2x5iz9melE";
@@ -19,7 +19,7 @@ final class BotTest extends TestCase
         $this->assertEquals($botId . ':' . $botKey, $bot->getAuthKey());
     }
 
-    public function testGetId()
+    public function testGetId() : void
     {
         $botId = 123123123;
         $botKey = "AAFKdyoJD6wHmHW85TfUktEMc2x5iz9melE";
@@ -27,7 +27,7 @@ final class BotTest extends TestCase
         $this->assertEquals($botId, $bot->getId());
     }
 
-    public function testGetKey()
+    public function testGetKey() : void
     {
         $botId = 123123123;
         $botKey = "AAFKdyoJD6wHmHW85TfUktEMc2x5iz9melE";
@@ -35,7 +35,7 @@ final class BotTest extends TestCase
         $this->assertEquals($botKey, $bot->getKey());
     }
 
-    public function testInvalidBotId()
+    public function testInvalidBotId() : void
     {
         $this->expectException(InvalidArgumentException::class);
         $botId = 0;
@@ -43,7 +43,7 @@ final class BotTest extends TestCase
         $bot = new Bot($botId, $botKey);
     }
 
-    public function testInvalidBotKey()
+    public function testInvalidBotKey() : void
     {
         $this->expectException(InvalidArgumentException::class);
         $botId = 123123;
@@ -51,7 +51,7 @@ final class BotTest extends TestCase
         $bot = new Bot($botId, $botKey);
     }
 
-    public function testIsValid_false()
+    public function testIsValid_false() : void
     {
         $botId = 123123123;
         $botKey = "AAFKdyoJD6wHmHW85TfUktEMc2x5iz9melE";
@@ -70,7 +70,7 @@ final class BotTest extends TestCase
         $this->assertEquals(false, $bot->isValid());
     }
 
-    public function testIsValid_true()
+    public function testIsValid_true() : void
     {
         $botId = 123123123;
         $botKey = "AAFKdyoJD6wHmHW85TfUktEMc2x5iz9melE";
