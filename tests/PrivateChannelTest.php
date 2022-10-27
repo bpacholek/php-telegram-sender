@@ -8,14 +8,14 @@ use PHPUnit\Framework\TestCase;
 
 final class PrivateChannelTest extends TestCase
 {
-    public function testGetChannelKey()
+    public function testGetChannelKey() : void
     {
         $channelId = 123123123;
         $privateChannel = new PrivateChannel($channelId);
         $this->assertEquals(intval('-100' . $channelId), $privateChannel->getChannelKey());
     }
 
-    public function testGetChannelId()
+    public function testGetChannelId() : void
     {
         $channelId = 123123123;
         $privateChannel = new PrivateChannel($channelId);

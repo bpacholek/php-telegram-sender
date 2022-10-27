@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IDCT\TelegramSender;
 
 /**
@@ -17,21 +19,21 @@ class BotInfo
     /**
      * Optional username given to the bot during creation.
      *
-     * @var string
+     * @var null|string
      */
     protected $username;
 
     /**
      * Optional first name given to the bot during creation.
      *
-     * @var string
+     * @var null|string
      */
     protected $firstName;
 
     /**
      * Optional last name given to the bot during creation.
      *
-     * @var string
+     * @var null|string
      */
     protected $lastName;
 
@@ -39,9 +41,9 @@ class BotInfo
      * Creates the instance of a bot's descriptor.
      *
      * @param int $id
-     * @param string $username
-     * @param string $firstName
-     * @param string $lastName
+     * @param null|string $username
+     * @param null|string $firstName
+     * @param null|string $lastName
      */
     public function __construct(int $id, string $username = null, string $firstName = null, string $lastName = null)
     {
